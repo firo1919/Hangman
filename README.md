@@ -18,4 +18,4 @@ To play the game, simply run the `Hangman.java` file in your Java IDE or termina
 
 ## Customization
 
-The game uses a list of words that can be customized by editing the `words.txt` file in the `src` directory. Each word should be on a separate line.
+The game uses a list of words that can be customized by editing the `words.txt` file. Each word should be on a separate line.
