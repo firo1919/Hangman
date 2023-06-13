@@ -54,14 +54,16 @@ public class Hangman {
       System.out.print("secretword: ");
       for (int i = 0; i < (secretword.length()); i++) {
         if (index.contains(i)) {
-          System.out.print(secretword.charAt(i));
+          System.out.print(secretword.charAt(i)+" ");
         } else {
-          System.out.print("_");
+          System.out.print("_ ");
         }
       }
       System.out.print("\nguessedwords: ");
       for (String i : guessedwords) {
-        System.out.print(i);
+        if(correct.contains(i))
+        {System.out.print("\u001B[32m"+i+"\u001B[0m"+" ");}
+        else {System.out.print("\u001B[31m"+i+"\u001B[0m"+" ");}
       }
     }
   }
@@ -105,10 +107,10 @@ public class Hangman {
         break;
     }
     if (gamewon()) {
-      System.out.println("You have won Congratulation :) \n");
+      System.out.println("\u001B[32m You have won Congratulation :)\u001B[0m \n");
     } else {
       System.out.println(bodypart[6]);
-      System.out.println("well not this time :( The correct word was '" + secretword + "'\n");
+      System.out.println("\u001B[31m well not this time :( \u001B[0m The correct word was '" + secretword + "'\n");
     }
   }
 }
