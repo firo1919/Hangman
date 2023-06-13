@@ -17,6 +17,15 @@ public class Hangman {
       "   ______\n  |      |\n  |      O\n  |     /|\\\n  |\n__|__",
       "   ______\n  |      |\n  |      O\n  |     /|\\\n  |     /\n__|__",
       "   ______\n  |      |\n  |      O\n  |     /|\\\n  |     / \\\n__|__\n" };
+  static String message = "\n                       WELCOME TO HANGMAN!\n" +
+        "\n" + 
+        "--> In this game, the computer will choose a random word, and your goal is to guess the word by suggesting letters.\n" +
+        "\n" + 
+        "--> You have a limited number of guesses, and with each incorrect guess, a part of the hangman is drawn.\n"+ 
+        "\n" +
+        "--> If the hangman is completely drawn before you guess the word, you lose.\n" +
+        "\n" + 
+        "Lets get started!".toUpperCase();
 
   public static void pickword() {
     Random r = new Random();
@@ -34,6 +43,9 @@ public class Hangman {
       System.out.println("error has occured: " + e.getMessage());
     }
   }
+  public static boolean gameover(){
+    return remainingGuess==0;
+  }
 
   public static void display() {
     if (!gamewon()) {
@@ -43,14 +55,14 @@ public class Hangman {
 
   public static void inputval() {
     Scanner sc = new Scanner(System.in);
-    if (!gamewon()) {
+    if (!gamewon()&&!gameover()) {
       System.out.print("\nenter your guess: ");
       guess = sc.nextLine();
     }
   }
 
   public static void underscore() {
-    if (!gamewon()) {
+    if (!gamewon()&&!gameover()) {
       System.out.print("secretword: ");
       for (int i = 0; i < (secretword.length()); i++) {
         if (index.contains(i)) {
@@ -73,7 +85,7 @@ public class Hangman {
   }
 
   public static void checkword() {
-    if (!gamewon()) {
+    if (!gamewon()&&!gameover()) {
       if (secretword.contains(guess) && (!correct.contains(guess))) {
         System.out.println("Correct guess!!\n");
         correct += guess;
@@ -84,17 +96,28 @@ public class Hangman {
           n++;
         }
       } else {
-        System.out.println("wrong guess try again\n");
-        guessedwords.add(guess);
+        System.out.println("wrong guess\n");
+        if(!guessedwords.contains(guess)) guessedwords.add(guess);
         remainingGuess--;
       }
     }
   }
 
   public static void main(String[] args) {
-
     pickword();
-    while (remainingGuess > 0) {
+    while (!gamewon()) {
+      try {
+    String os = System.getProperty("os.name").toLowerCase();
+    ProcessBuilder pb;
+    if (os.contains("win")) {
+        pb = new ProcessBuilder("cmd", "/c", "cls");
+    } else {
+        pb = new ProcessBuilder("clear");
+    }
+    pb.inheritIO().start().waitFor();
+} catch (IOException | InterruptedException e){
+}
+      System.out.println(message);
       display();
       underscore();
       inputval();
@@ -103,12 +126,23 @@ public class Hangman {
         Thread.sleep(1000);
       } catch (InterruptedException e) {
       }
-      if (gamewon())
-        break;
+      if(remainingGuess==0) break;
     }
     if (gamewon()) {
       System.out.println("\u001B[32m You have won Congratulation :)\u001B[0m \n");
     } else {
+      try {
+    String os = System.getProperty("os.name").toLowerCase();
+    ProcessBuilder pb;
+    if (os.contains("win")) {
+        pb = new ProcessBuilder("cmd", "/c", "cls");
+    } else {
+        pb = new ProcessBuilder("clear");
+    }
+    pb.inheritIO().start().waitFor();
+} catch (IOException | InterruptedException e){
+}
+      System.out.println(message);
       System.out.println(bodypart[6]);
       System.out.println("\u001B[31m well not this time :( \u001B[0m The correct word was '" + secretword + "'\n");
     }
