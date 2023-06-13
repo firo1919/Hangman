@@ -2,8 +2,11 @@
 
 This is a simple console-based implementation of the classic game Hangman. The game randomly selects a word from a list of words, and the player must guess the word by entering letters one at a time. The player has a limited number of guesses before the game is over.
 
+<<<<<<< HEAD
 ![Alt text](hangman_demo.gif)
 
+=======
+>>>>>>> dc37364f9d451f71c7ab3a9aee4ca825b7d93436
 ## Getting Started
 
 To play the game, simply run the `Hangman.java` file in your Java IDE or terminal. The game will start immediately.
