@@ -46,17 +46,17 @@ public class Hangman {
     }
   }
 
-  public static boolean gameover() {
+  static boolean gameover() {
     return remainingGuess == 0;
   }
 
-  public static void display() {
+  static void display() {
     if (!gamewon()) {
       System.out.println(bodypart[6 - remainingGuess]);
     }
   }
 
-  public static void inputval() {
+  static void inputval() {
     Scanner sc = new Scanner(System.in);
     if (!gamewon() && !gameover()) {
       System.out.print("\nenter your guess: ");
@@ -64,7 +64,7 @@ public class Hangman {
     }
   }
 
-  public static void underscore() {
+  static void underscore() {
     if (!gamewon() && !gameover()) {
       System.out.print("secretword: ");
       for (int i = 0; i < (secretword.length()); i++) {
@@ -85,11 +85,11 @@ public class Hangman {
     }
   }
 
-  public static boolean gamewon() {
+  static boolean gamewon() {
     return secretword.length() == correct.length();
   }
 
-  public static void checkword() {
+  static void checkword() {
     if (!gamewon() && !gameover()) {
       if (secretword.contains(""+guess) && (!correct.contains(""+guess))) {
         System.out.println("Correct guess!!\n");
